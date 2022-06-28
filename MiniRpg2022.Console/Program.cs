@@ -10,6 +10,7 @@ class Program
     static void Main(string[] args)
     {
         var configuration = new Configuration();
+
         configuration.RegisterOccupation(new Mage());
         configuration.RegisterOccupation(new Warrior());
         configuration.RegisterOccupation(new Archer());
