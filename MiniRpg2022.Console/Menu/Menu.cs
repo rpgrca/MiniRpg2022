@@ -15,7 +15,8 @@ public class Menu
         _menuItems = new List<MenuItem>
         {
             new LoadMenu(),
-            new ShowDataMenu()
+            new ShowDataMenu(),
+            new QuitMenu()
         };
 
         _configuration = configuration;
@@ -35,7 +36,8 @@ public class Menu
         while (!_quit);
     }
 
-    private void DisplayMenu() => System.Console.WriteLine(string.Join("\n", _menuItems.Select(p => $"{p.Index}) {p.Text}")));
+    private void DisplayMenu() =>
+        System.Console.WriteLine(string.Join("\n", _menuItems.Select((p, i) => $"{i + 1}) {p.Text}")));
 
     private void ReadOption()
     {
@@ -45,7 +47,13 @@ public class Menu
         System.Console.WriteLine();
     }
 
-    private void FindSelectedMenuItem() => _selectedMenuItem = _menuItems.SingleOrDefault(p => p.Index == _key - '0', new NullMenuItem());
+    private void FindSelectedMenuItem()
+    {
+        var index = _key - '0' - 1;
+        _selectedMenuItem = index >= 0 && index < _menuItems.Count
+            ? _menuItems[index]
+            : new NullMenuItem();
+    }
 
     private void ExecuteMenuItem() => _quit = _selectedMenuItem.Execute(_configuration);
 }

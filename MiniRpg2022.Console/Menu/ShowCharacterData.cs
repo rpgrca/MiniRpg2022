@@ -4,7 +4,7 @@ namespace MiniRpg2022.Console;
 
 public class ShowDataMenu : MenuItem
 {
-    public ShowDataMenu() : base(2, "Show character data")
+    public ShowDataMenu() : base("Show character data")
     {
     }
 

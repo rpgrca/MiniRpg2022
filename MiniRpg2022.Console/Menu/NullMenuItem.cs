@@ -4,7 +4,7 @@ namespace MiniRpg2022.Console;
 
 public class NullMenuItem : MenuItem
 {
-    public NullMenuItem() : base(0, string.Empty)
+    public NullMenuItem() : base(string.Empty)
     {
     }
 
