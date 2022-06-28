@@ -30,13 +30,20 @@ public class Menu
 
             FindSelectedMenuItem();
             ExecuteMenuItem();
+            System.Console.WriteLine();
         }
-        while (_quit);
+        while (!_quit);
     }
 
     private void DisplayMenu() => System.Console.WriteLine(string.Join("\n", _menuItems.Select(p => $"{p.Index}) {p.Text}")));
 
-    private void ReadOption() => _key = System.Console.ReadKey().KeyChar;
+    private void ReadOption()
+    {
+        System.Console.Write("Choose an option: ");
+        var keyboard = System.Console.ReadLine();
+        _key = (keyboard?.Length != 1)? ' ' : keyboard[0];
+        System.Console.WriteLine();
+    }
 
     private void FindSelectedMenuItem() => _selectedMenuItem = _menuItems.SingleOrDefault(p => p.Index == _key - '0', new NullMenuItem());
 

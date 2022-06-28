@@ -10,23 +10,24 @@ public class ShowDataMenu : MenuItem
 
     public override bool Execute(Configuration configuration)
     {
-        var name = Choose(Text, configuration.GetCharacterNames());
-        DisplayDataFrom(configuration.GetCharacterOrDefault(name));
+        var names = configuration.GetCharacterNames();
+        if (! names.Any())
+        {
+            System.Console.WriteLine("No loaded characters still.");
+            return false;
+        }
+
+        var name = Choose("Choose a character", names);
+        DisplayDataFrom(configuration.GetCharacter(name));
         return false;
     }
 
-    private static void DisplayDataFrom(Character? character)
+    private static void DisplayDataFrom(Character character)
     {
-        if (character is null)
-        {
-            System.Console.WriteLine("Unknown character");
-        }
-        else
-        {
-            System.Console.WriteLine($"Name: {character.Name}" +
-                                     $"Nickname: {character.Nickname}" +
-                                     $"Occupation: {character.Occupation}" +
-                                     $"Birthday: {character.Birthday}");
-        }
+        System.Console.WriteLine(Environment.NewLine +
+            $"Name: {character.Name}" + Environment.NewLine +
+            $"Nickname: {character.Nickname}" + Environment.NewLine +
+            $"Occupation: {character.Occupation}" + Environment.NewLine +
+            $"Birthday: {character.Birthday}");
     }
 }

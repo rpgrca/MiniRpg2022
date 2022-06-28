@@ -14,13 +14,13 @@ class Program
         configuration.RegisterOccupation(new Archer());
         configuration.RegisterOccupation(new Thief());
 
-        var item = new LoadMenu();
-        item.Execute(configuration);
+        var menu = new Menu(configuration);
+        menu.Execute();
 
-
+/*
         List<datos> datosPersonajes = new List<datos>();
 
-        cargar(datosPersonajes);
+        cargar(datosPersonajes);*/
 
     }
 

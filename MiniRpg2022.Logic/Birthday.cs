@@ -14,5 +14,5 @@ public partial class Birthday
         _birthday = birthday;
     }
 
-    public override string ToString() => _birthday.ToString();
+    public override string ToString() => _birthday.ToString("yyyy/MM/dd");
 }

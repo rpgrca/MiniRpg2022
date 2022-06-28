@@ -1,3 +1,4 @@
+using System.Globalization;
 using Videogame;
 
 namespace MiniRpg2022.Console;
@@ -38,5 +39,19 @@ public abstract class MenuItem
         while (conditionCallback(answer));
 
         return answer;
+    }
+
+    protected DateOnly PromptDate(string prompt, string format)
+    {
+        DateOnly result;
+        string? answer;
+        do
+        {
+            System.Console.Write($"- {prompt} ({format}): ");
+            answer = System.Console.ReadLine();
+        }
+        while (!DateOnly.TryParseExact(answer, new [] { format }, CultureInfo.InvariantCulture, DateTimeStyles.None, out result));
+
+        return result;
     }
 }

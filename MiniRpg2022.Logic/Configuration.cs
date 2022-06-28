@@ -16,6 +16,8 @@ public class Configuration
 
     public Character? GetCharacterOrDefault(string name) => !_characters.ContainsKey(name) ? null : _characters[name];
 
+    public Character GetCharacter(string name) => _characters[name];
+
     public void RegisterCharacter(Character character)
     {
         if (_characters.ContainsKey(character.Name))
@@ -31,4 +33,6 @@ public class Configuration
     public IEnumerable<string> GetOccupationNames() => _occupations.Select(p => p.Key);
 
     public IEnumerable<string> GetCharacterNames() => _characters.Select(p => p.Key);
+
+    public IOccupation GetOccupation(string name) => _occupations[name];
 }
