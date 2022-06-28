@@ -8,4 +8,5 @@ public static class Constants
     public const string RAISTLIN_BIRTHDAY_IN_TEXT = "3/15/2017";
     public static readonly DateOnly TODAY = new(2022, 6, 27);
     public static readonly DateOnly AMERICA_DISCOVERY = new(1492, 10, 12);
+    public const string RAISTLIN_TYPE = "mage";
 }

@@ -13,10 +13,12 @@ public class CharacterMust
         Assert.Equal(RAISTLIN_NAME, sut.Name);
     }
 
-    private static Character CreateSubjectUnderTest() => new(RAISTLIN_NAME, RAISTLIN_NICKNAME, GetRaistlinBirthday());
+    private static Character CreateSubjectUnderTest() => new(RAISTLIN_NAME, RAISTLIN_NICKNAME, GetRaistlinBirthday(), GetRaistlinOccupation());
 
     private static Birthday GetRaistlinBirthday() =>
         new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
+
+    private static IOccupation GetRaistlinOccupation() => new Mage();
 
     [Theory]
     [InlineData("")]
@@ -24,7 +26,7 @@ public class CharacterMust
     [InlineData(null)]
     public void ThrowException_WhenNameIsInvalid(string invalidName)
     {
-        var exception = Assert.Throws<ArgumentException>("name", () => new Character(invalidName, RAISTLIN_NICKNAME, GetRaistlinBirthday()));
+        var exception = Assert.Throws<ArgumentException>("name", () => new Character(invalidName, RAISTLIN_NICKNAME, GetRaistlinBirthday(), GetRaistlinOccupation()));
         Assert.StartsWith("Invalid name", exception.Message);
     }
 
@@ -45,7 +47,7 @@ public class CharacterMust
     [Fact]
     public void ThrowException_WhenNicknameIsInvalid()
     {
-        var exception = Assert.Throws<ArgumentException>("nickname", () => new Character(RAISTLIN_NAME, null, GetRaistlinBirthday()));
+        var exception = Assert.Throws<ArgumentException>("nickname", () => new Character(RAISTLIN_NAME, null, GetRaistlinBirthday(), GetRaistlinOccupation()));
         Assert.StartsWith("Invalid nickname", exception.Message);
     }
 
@@ -54,7 +56,14 @@ public class CharacterMust
     [InlineData(RAISTLIN_NICKNAME)]
     public void ReturnNicknameCorrectly(string nickname)
     {
-        var sut = new Character(RAISTLIN_NAME, nickname, GetRaistlinBirthday());
+        var sut = new Character(RAISTLIN_NAME, nickname, GetRaistlinBirthday(), GetRaistlinOccupation());
         Assert.Equal(nickname, sut.Nickname);
+    }
+
+    [Fact]
+    public void ReturnTypeCorrectly()
+    {
+        var sut = CreateSubjectUnderTest();
+        Assert.Equal(RAISTLIN_TYPE, sut.Occupation.ToString());
     }
 }
