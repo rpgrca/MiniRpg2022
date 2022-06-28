@@ -31,6 +31,13 @@ public class CharacterMust
     }
 
     [Fact]
+    public void ThrowException_WhenBirthdayIsInvalid()
+    {
+        var exception = Assert.Throws<ArgumentException>("birthday", () => new Character(RAISTLIN_NAME, RAISTLIN_NICKNAME, null, GetRaistlinOccupation()));
+        Assert.StartsWith("Invalid birthday", exception.Message);
+    }
+
+    [Fact]
     public void ReturnBirthdayCorrectly()
     {
         var sut = CreateSubjectUnderTest();

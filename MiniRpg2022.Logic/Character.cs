@@ -1,6 +1,6 @@
 namespace Videogame;
 
-public class Character
+public partial class Character
 {
     public string Name { get; }
     public string Nickname { get; }
@@ -12,6 +12,7 @@ public class Character
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
+        if (birthday is null) throw new ArgumentException("Invalid birthday", nameof(birthday));
 
         Name = name;
         Nickname = nickname;
