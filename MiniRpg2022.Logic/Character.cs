@@ -1,3 +1,5 @@
+using MiniRpg2022.Logic.Characteristics;
+
 namespace Videogame;
 
 public partial class Character

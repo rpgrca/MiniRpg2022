@@ -1,15 +1,4 @@
-namespace Videogame;
-
-public class LimitedValueBetween
-{
-    protected int Value { get; }
-
-    protected LimitedValueBetween(int minimum, int maximum, int value)
-    {
-        if (value < minimum || value > maximum) throw new ArgumentException($"Invalid property value {value}");
-        Value = value;
-    }
-}
+namespace MiniRpg2022.Logic.Characteristics;
 
 public class Speed : LimitedValueBetween
 {
@@ -20,15 +9,4 @@ public class Speed : LimitedValueBetween
     }
 
     public static implicit operator int(Speed speed) => speed.Value;
-}
-
-public class Dexterity : LimitedValueBetween
-{
-    public static Dexterity From(int value) => new(value);
-
-    private Dexterity(int dexterity) : base(1, 5, dexterity)
-    {
-    }
-
-    public static implicit operator int(Dexterity dexterity) => dexterity.Value;
 }
