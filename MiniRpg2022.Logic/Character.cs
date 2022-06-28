@@ -3,14 +3,17 @@ namespace Videogame;
 public class Character
 {
     public string Name { get; }
+    public string Nickname { get; }
     public Birthday Birthday { get; }
     public int Health { get; }
 
-    public Character(string name, Birthday birthday)
+    public Character(string name, string nickname, Birthday birthday)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
+        if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
 
         Name = name;
+        Nickname = nickname;
         Birthday = birthday;
         Health = 100;
     }
