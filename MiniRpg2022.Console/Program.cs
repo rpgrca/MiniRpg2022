@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MiniRpg2022.Logic.Characteristics;
 using Videogame;
 
 namespace MiniRpg2022.Console;
@@ -13,6 +14,12 @@ class Program
         configuration.RegisterOccupation(new Warrior());
         configuration.RegisterOccupation(new Archer());
         configuration.RegisterOccupation(new Thief());
+
+        configuration.RegisterProperty(new("speed", 1, 10));
+        configuration.RegisterProperty(new("dexterity", 1, 5));
+        configuration.RegisterProperty(new("strength", 1, 10));
+        configuration.RegisterProperty(new("level", 1, 10));
+        configuration.RegisterProperty(new("armour", 1, 10));
 
         var menu = new Menu(configuration);
         menu.Execute();

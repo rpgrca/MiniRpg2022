@@ -1,5 +1,6 @@
 using static MiniRpg2022.UnitTests.Constants;
 using Videogame;
+using MiniRpg2022.Logic.Characteristics;
 
 namespace MiniRpg2022.UnitTests;
 
@@ -22,6 +23,7 @@ public class CharacterMust
             .AlsoKnownAs(RAISTLIN_NICKNAME)
             .BornOn(GetRaistlinBirthday())
             .As(GetRaistlinOccupation())
+            .CreatingPropertiesWith(PropertyFactory.Director.AddDefaultProperties(new PropertyFactory.Builder()).Build())
             .WithProperty("speed", RAISTLIN_SPEED)
             .WithProperty("dexterity", RAISTLIN_DEXTERITY)
             .WithProperty("strength", RAISTLIN_STRENGTH)

@@ -18,7 +18,7 @@ public partial class Character
             _name = string.Empty;
             _nickname = string.Empty;
             _properties = new Dictionary<string, int>();
-            _propertyFactory = new PropertyFactory();
+            _propertyFactory = new PropertyFactory(new Dictionary<string, Property>());
         }
 
         public Builder Called(string name)

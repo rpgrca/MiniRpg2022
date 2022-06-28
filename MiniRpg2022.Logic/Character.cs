@@ -5,7 +5,7 @@ namespace Videogame;
 
 public partial class Character
 {
-    private readonly Dictionary<string, Property> _properties;
+    private readonly Dictionary<string, PropertyValue> _properties;
 
     public string Name { get; }
     public string Nickname { get; }
@@ -13,7 +13,7 @@ public partial class Character
     public IOccupation Occupation { get; }
     public int Health { get; }
 
-    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, Dictionary<string, Property> properties)
+    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, Dictionary<string, PropertyValue> properties)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));

@@ -2,20 +2,15 @@ namespace MiniRpg2022.Logic.Characteristics;
 
 public class Property
 {
-    private readonly int _minimum;
-    private readonly int _maximum;
-
     public string Name { get; }
-    public int Value { get; }
+    public int Minimum { get; }
+    public int Maximum { get; }
 
-    public Property(string name, int minimum, int maximum, int value)
+    public Property(string name, int minimum, int maximum)
     {
-        if (value < minimum || value > maximum) throw new ArgumentException($"Invalid property value {value}");
-
-        _minimum = minimum;
-        _maximum = maximum;
-
+        if (minimum > maximum) throw new ArgumentException("Minimum limit cannot be higher than maximum limit");
+        Minimum = minimum;
+        Maximum = maximum;
         Name = name;
-        Value = value;
     }
 }
