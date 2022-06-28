@@ -26,8 +26,8 @@ public class Birthday
 
     private Birthday(DateOnly today, DateOnly birthday)
     {
-        if (birthday == DateOnly.MinValue) throw new ArgumentException("Invalid birthday", nameof(birthday));
-        if (today == DateOnly.MinValue) throw new ArgumentException("Invalid today", nameof(today));
+        if (birthday == DateOnly.MinValue || birthday == DateOnly.MaxValue) throw new ArgumentException("Invalid birthday", nameof(birthday));
+        if (today == DateOnly.MinValue || today == DateOnly.MaxValue) throw new ArgumentException("Invalid today", nameof(today));
         if (Math.Abs(today.Year - birthday.Year) > 300) throw new ArgumentException("Invalid birthday", nameof(birthday));
         _birthday = birthday;
     }
