@@ -6,6 +6,7 @@ public class Character
 
     public Character(string name)
     {
+        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         Name = name;
     }
 }
