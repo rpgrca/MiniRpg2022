@@ -30,5 +30,7 @@ public partial class Character
         _properties = properties;
     }
 
-    public int GetValueFor(string property) => _properties[property].Value;
+    public int GetValueFor(string property) => _properties.ContainsKey(property)
+        ? _properties[property].Value
+        : -1;
 }
