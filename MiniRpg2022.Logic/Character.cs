@@ -11,8 +11,9 @@ public partial class Character
     public IOccupation Occupation { get; }
     public Speed Speed { get; }
     public Dexterity Dexterity { get; }
+    public Strength Strength { get; }
 
-    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, int speed, int agility)
+    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, int speed, int agility, int strength)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
@@ -26,5 +27,6 @@ public partial class Character
         Health = 100;
         Speed = Speed.From(speed);
         Dexterity = Dexterity.From(agility);
+        Strength = Strength.From(strength);
     }
 }

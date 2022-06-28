@@ -23,7 +23,8 @@ public class CharacterMust
             .BornOn(GetRaistlinBirthday())
             .As(GetRaistlinOccupation())
             .WithSpeedOf(RAISTLIN_SPEED)
-            .WithDexterityOf(RAISTLIN_DEXTERITY);
+            .WithDexterityOf(RAISTLIN_DEXTERITY)
+            .WithStrengthOf(RAISTLIN_STRENGTH);
 
     private static Birthday GetRaistlinBirthday() =>
         new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
@@ -136,5 +137,24 @@ public class CharacterMust
     {
         var sut = CreateSubjectUnderTest();
         Assert.Equal(RAISTLIN_DEXTERITY, sut.Dexterity);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(11)]
+    [InlineData(100)]
+    public void ThrowException_WhenStrengthIsInvalid(int invalidStrength)
+    {
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithStrengthOf(invalidStrength).Build());
+        Assert.StartsWith("Invalid property value", exception.Message);
+        Assert.Contains(invalidStrength.ToString(), exception.Message);
+    }
+
+    [Fact]
+    public void ReturnStrengthCorrectly()
+    {
+        var sut = CreateSubjectUnderTest();
+        Assert.Equal(RAISTLIN_STRENGTH, sut.Strength);
     }
 }

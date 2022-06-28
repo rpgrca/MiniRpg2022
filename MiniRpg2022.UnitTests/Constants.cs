@@ -11,4 +11,5 @@ public static class Constants
     public const string RAISTLIN_TYPE = "mage";
     public const int RAISTLIN_SPEED = 1;
     public const int RAISTLIN_DEXTERITY = 2;
+    public const int RAISTLIN_STRENGTH = 3;
 }
