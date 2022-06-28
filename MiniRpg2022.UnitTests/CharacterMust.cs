@@ -31,4 +31,11 @@ public class CharacterMust
         var sut = new Character("Raistlin", GetRaistlinBirthday());
         Assert.Equal(RAISTLIN_BIRTHDAY_IN_TEXT, sut.Birthday.ToString());
     }
+
+    [Fact]
+    public void ReturnHealthCorrectly()
+    {
+        var sut = new Character("Raistlin", GetRaistlinBirthday());
+        Assert.Equal(100, sut.Health);
+    }
 }
