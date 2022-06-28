@@ -12,4 +12,5 @@ public static class Constants
     public const int RAISTLIN_SPEED = 1;
     public const int RAISTLIN_DEXTERITY = 2;
     public const int RAISTLIN_STRENGTH = 3;
+    public const int RAISTLIN_LEVEL = 9;
 }

@@ -11,6 +11,7 @@ public partial class Character
         private int _speed;
         private int _dexterity;
         private int _strength;
+        private int _level;
 
         public Builder()
         {
@@ -60,6 +61,12 @@ public partial class Character
             return this;
         }
 
-        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed, _dexterity, _strength);
+        public Builder WithLevelOf(int level)
+        {
+            _level = level;
+            return this;
+        }
+
+        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed, _dexterity, _strength, _level);
     }
 }

@@ -24,7 +24,8 @@ public class CharacterMust
             .As(GetRaistlinOccupation())
             .WithSpeedOf(RAISTLIN_SPEED)
             .WithDexterityOf(RAISTLIN_DEXTERITY)
-            .WithStrengthOf(RAISTLIN_STRENGTH);
+            .WithStrengthOf(RAISTLIN_STRENGTH)
+            .WithLevelOf(RAISTLIN_LEVEL);
 
     private static Birthday GetRaistlinBirthday() =>
         new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
@@ -156,5 +157,24 @@ public class CharacterMust
     {
         var sut = CreateSubjectUnderTest();
         Assert.Equal(RAISTLIN_STRENGTH, sut.Strength);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(11)]
+    [InlineData(100)]
+    public void ThrowException_WhenLevelIsInvalid(int invalidLevel)
+    {
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithLevelOf(invalidLevel).Build());
+        Assert.StartsWith("Invalid property value", exception.Message);
+        Assert.Contains(invalidLevel.ToString(), exception.Message);
+    }
+
+    [Fact]
+    public void ReturnLevelCorrectly()
+    {
+        var sut = CreateSubjectUnderTest();
+        Assert.Equal(RAISTLIN_LEVEL, sut.Level);
     }
 }
