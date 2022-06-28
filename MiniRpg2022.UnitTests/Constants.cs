@@ -9,4 +9,5 @@ public static class Constants
     public static readonly DateOnly TODAY = new(2022, 6, 27);
     public static readonly DateOnly AMERICA_DISCOVERY = new(1492, 10, 12);
     public const string RAISTLIN_TYPE = "mage";
+    public const int RAISTLIN_SPEED = 1;
 }

@@ -8,6 +8,7 @@ public partial class Character
         private string _nickname;
         private Birthday _birthday;
         private IOccupation _occupation;
+        private int _speed;
 
         public Builder()
         {
@@ -39,6 +40,12 @@ public partial class Character
             return this;
         }
 
-        public Character Build() => new(_name, _nickname, _birthday, _occupation);
+        public Builder WithSpeedOf(int speed)
+        {
+            _speed = speed;
+            return this;
+        }
+
+        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed);
     }
 }

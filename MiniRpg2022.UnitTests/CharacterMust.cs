@@ -14,12 +14,15 @@ public class CharacterMust
     }
 
     private static Character CreateSubjectUnderTest() =>
+        SetupSubjectUnderTest().Build();
+
+    private static Character.Builder SetupSubjectUnderTest() =>
         new Character.Builder()
             .Called(RAISTLIN_NAME)
             .AlsoKnownAs(RAISTLIN_NICKNAME)
             .BornOn(GetRaistlinBirthday())
             .As(GetRaistlinOccupation())
-            .Build();
+            .WithSpeedOf(RAISTLIN_SPEED);
 
     private static Birthday GetRaistlinBirthday() =>
         new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
@@ -69,11 +72,8 @@ public class CharacterMust
     [InlineData(RAISTLIN_NICKNAME)]
     public void ReturnNicknameCorrectly(string nickname)
     {
-        var sut = new Character.Builder()
-            .Called(RAISTLIN_NAME)
+        var sut = SetupSubjectUnderTest()
             .AlsoKnownAs(nickname)
-            .BornOn(GetRaistlinBirthday())
-            .As(GetRaistlinOccupation())
             .Build();
         Assert.Equal(nickname, sut.Nickname);
     }
@@ -97,5 +97,15 @@ public class CharacterMust
     {
         var exception = Assert.Throws<ArgumentException>("occupation", () => new Character.Builder().Called(RAISTLIN_NAME).BornOn(GetRaistlinBirthday()).As(null).Build());
         Assert.StartsWith("Invalid occupation", exception.Message);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(11)]
+    [InlineData(100)]
+    public void ThrowException_WhenSpeedIsInvalid(int invalidSpeed)
+    {
+        var exception = Assert.Throws<ArgumentException>("speed", () => new Character.Builder().Called(RAISTLIN_NAME).BornOn(GetRaistlinBirthday()).As(GetRaistlinOccupation()).WithSpeedOf(invalidSpeed).Build());
     }
 }

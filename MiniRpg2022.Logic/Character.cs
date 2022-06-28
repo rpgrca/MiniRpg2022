@@ -7,8 +7,9 @@ public partial class Character
     public Birthday Birthday { get; }
     public int Health { get; }
     public IOccupation Occupation { get; }
+    public Speed Speed { get; }
 
-    private Character(string name, string nickname, Birthday birthday, IOccupation occupation)
+    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, int speed)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
@@ -20,5 +21,6 @@ public partial class Character
         Birthday = birthday;
         Occupation = occupation;
         Health = 100;
+        Speed = Speed.From(speed);
     }
 }
