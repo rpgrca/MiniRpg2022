@@ -16,7 +16,7 @@ public class Character
         Name = name;
         Nickname = nickname;
         Birthday = birthday;
-        Health = 100;
         Occupation = occupation;
+        Health = 100;
     }
 }
