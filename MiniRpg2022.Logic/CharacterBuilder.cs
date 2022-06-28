@@ -12,6 +12,7 @@ public partial class Character
         private int _dexterity;
         private int _strength;
         private int _level;
+        private int _armour;
 
         public Builder()
         {
@@ -67,6 +68,12 @@ public partial class Character
             return this;
         }
 
-        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed, _dexterity, _strength, _level);
+        public Builder WithArmourOf(int armour)
+        {
+            _armour = armour;
+            return this;
+        }
+
+        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed, _dexterity, _strength, _level, _armour);
     }
 }
