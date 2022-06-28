@@ -1,17 +1,19 @@
+using static MiniRpg2022.UnitTests.Constants;
 using Videogame;
 
 namespace MiniRpg2022.UnitTests;
 
 public class CharacterMust
 {
-    private static readonly DateOnly RAISTLIN_BIRTHDAY = new DateOnly(2017, 3, 15);
-
     [Fact]
     public void ReturnNameCorrectly()
     {
-        var sut = new Character("Raistlin", RAISTLIN_BIRTHDAY);
+        var sut = new Character("Raistlin", GetRaistlinBirthday());
         Assert.Equal("Raistlin", sut.Name);
     }
+
+    private static Birthday GetRaistlinBirthday() =>
+        new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
 
     [Theory]
     [InlineData("")]
@@ -19,15 +21,14 @@ public class CharacterMust
     [InlineData(null)]
     public void ThrowException_WhenNameIsInvalid(string invalidName)
     {
-        var exception = Assert.Throws<ArgumentException>("name", () => new Character(invalidName, RAISTLIN_BIRTHDAY));
+        var exception = Assert.Throws<ArgumentException>("name", () => new Character(invalidName, GetRaistlinBirthday()));
         Assert.StartsWith("Invalid name", exception.Message);
-        Assert.Contains("'name'", exception.Message);
     }
 
     [Fact]
     public void ReturnBirthdayCorrectly()
     {
-        var sut = new Character("Raistlin", RAISTLIN_BIRTHDAY);
-        Assert.Equal(RAISTLIN_BIRTHDAY, sut.Birthday);
+        var sut = new Character("Raistlin", GetRaistlinBirthday());
+        Assert.Equal(RAISTLIN_BIRTHDAY_IN_TEXT, sut.Birthday.ToString());
     }
 }
