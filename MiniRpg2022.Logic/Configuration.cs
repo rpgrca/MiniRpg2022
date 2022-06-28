@@ -9,7 +9,6 @@ public class Configuration
     private readonly List<string> _names;
     private readonly List<Property> _properties;
     private readonly DateOnly _today;
-    private readonly Random _randomGenerator;
 
     public Configuration(int year, int month, int day)
     {
@@ -18,8 +17,9 @@ public class Configuration
         _properties = new List<Property>();
         _names = new List<string>();
         _today = new DateOnly(year, month, day);
-        _randomGenerator = new Random();
     }
+
+    internal Randomizer CreateRandomizer() => new(_names, _today, _occupations, _properties);
 
     public void RegisterOccupation(IOccupation occupation) =>
         _occupations.Add(occupation.ToString(), occupation);
@@ -46,6 +46,8 @@ public class Configuration
         }
     }
 
+    internal IEnumerable<IOccupation> GetOccupations() => _occupations.Values;
+
     public void RegisterName(string name)
     {
         if (! _names.Contains(name))
@@ -61,32 +63,6 @@ public class Configuration
     public IOccupation GetOccupation(string name) => _occupations[name];
 
     public void RegisterProperty(Property property) => _properties.Add(property);
-
-    public IOccupation GetRandomOccupation() =>
-        _occupations.Values.ToArray()[_randomGenerator.Next(0, _occupations.Count)];
-
-    public Birthday GetRandomBirthday() =>
-        new Birthday.Builder()
-            .BeingToday(_today)
-            .BornOn(_today.AddYears(_randomGenerator.Next(-300, -1)))
-            .Build();
-
-    public int GetRandomValueFor(Property property) =>
-        _randomGenerator.Next(property.Minimum, property.Maximum + 1);
-
-    public string GetRandomName()
-    {
-        if (_names.Count == 0)
-        {
-            return $"Name{_randomGenerator.Next()}";
-        }
-
-        var randomValue = _randomGenerator.Next(0, _names.Count);
-
-        var name = _names[randomValue];
-        _names.Remove(name);
-        return name;
-    }
 
     public IEnumerable<Property> GetProperties() => _properties;
 }
