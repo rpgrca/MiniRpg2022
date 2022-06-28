@@ -49,27 +49,22 @@ public class LoadPropertiesMenu : MenuItem
 
         var name = Choose("Choose a character", names);
         var character = configuration.GetCharacter(name);
+        var characterBuilder = new Character.Builder();
 
         foreach (var property in configuration.GetProperties())
         {
-
+            var value = PromptRange($"Choose value for {property.Name}", property.Minimum, property.Maximum);
+            characterBuilder.WithProperty(property.Name, value);
         }
 
-        var occupation = Choose("Please choose an occupation", configuration.GetOccupationNames());
-        var nickname = Prompt("Add a nickname for your character", v => v is null);
-        var birthday = PromptDate("Please input your character birthday", "yyyy/MM/dd");
-
-        var character = new Character.Builder()
-            .Called(name)
-            .AlsoKnownAs(nickname)
-            .BornOn(new Birthday.Builder().BornOn(birthday).Build())
-            .As(configuration.GetOccupation(occupation))
+        character = characterBuilder
+            .Called(character.Name)
+            .AlsoKnownAs(character.Nickname)
+            .BornOn(character.Birthday)
+            .As(character.Occupation)
             .Build();
 
         configuration.RegisterCharacter(character);
-
         return false;
     }
-
-    private void 
 }

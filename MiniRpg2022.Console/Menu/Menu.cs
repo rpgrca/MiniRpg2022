@@ -16,6 +16,7 @@ public class Menu
         {
             new LoadMenu(),
             new ShowDataMenu(),
+            new LoadPropertiesMenu(),
             new QuitMenu()
         };
 

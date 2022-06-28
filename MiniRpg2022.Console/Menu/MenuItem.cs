@@ -51,4 +51,20 @@ public abstract class MenuItem
 
         return result;
     }
+
+    protected int PromptRange(string prompt, int minimum, int maximum)
+    {
+        do
+        {
+            System.Console.Write($"- {prompt} ({minimum}..{maximum}): ");
+            var answer = System.Console.ReadLine();
+            if (int.TryParse(answer, out int value))
+            {
+                if (minimum <= value && value <= maximum)
+                {
+                    return value;
+                }
+            }
+        } while (true);
+    }
 }

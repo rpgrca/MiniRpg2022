@@ -19,6 +19,12 @@ public partial class Birthday
             return this;
         }
 
+        public Builder BornOn(Birthday birthday)
+        {
+            _birthday = birthday._birthday;
+            return this;
+        }
+
         public Birthday Build() => new(_today, _birthday);
     }
 }
