@@ -9,7 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var configuration = new Configuration();
+        var configuration = new Configuration(2022, 6, 28);
 
         configuration.RegisterOccupation(new Mage());
         configuration.RegisterOccupation(new Warrior());
@@ -21,6 +21,12 @@ class Program
         configuration.RegisterProperty(new("strength", 1, 10));
         configuration.RegisterProperty(new("level", 1, 10));
         configuration.RegisterProperty(new("armour", 1, 10));
+
+        configuration.RegisterName("Raistlin Majere");
+        configuration.RegisterName("Tanis Half-Elven");
+        configuration.RegisterName("Sturm Brightblade");
+        configuration.RegisterName("Goldmoon");
+
 
         var menu = new Menu(configuration);
         menu.Execute();

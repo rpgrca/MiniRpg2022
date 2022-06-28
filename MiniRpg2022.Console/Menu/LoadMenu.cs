@@ -1,10 +1,11 @@
+using MiniRpg2022.Logic.Characteristics;
 using Videogame;
 
 namespace MiniRpg2022.Console;
 
-public class LoadMenu : MenuItem
+public class ManualLoadMenu : MenuItem
 {
-    public LoadMenu() : base("Create character")
+    public ManualLoadMenu() : base("Create character manually")
     {
     }
 

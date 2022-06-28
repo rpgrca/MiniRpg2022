@@ -3,9 +3,9 @@ using Videogame;
 
 namespace MiniRpg2022.Console;
 
-public class LoadPropertiesMenu : MenuItem
+public class ManualLoadPropertiesMenu : MenuItem
 {
-    public LoadPropertiesMenu() : base("Load properties")
+    public ManualLoadPropertiesMenu() : base("Load properties manually")
     {
     }
 

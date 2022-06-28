@@ -14,10 +14,11 @@ public class Menu
     {
         _menuItems = new List<MenuItem>
         {
-            new LoadMenu(),
+            new ManualLoadMenu(),
             new ShowDataMenu(),
-            new LoadPropertiesMenu(),
+            new ManualLoadPropertiesMenu(),
             new ShowPropertyMenu(),
+            new RandomLoadMenu(),
             new QuitMenu()
         };
 
