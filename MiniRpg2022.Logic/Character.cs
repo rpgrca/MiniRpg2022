@@ -13,6 +13,7 @@ public partial class Character
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
         if (birthday is null) throw new ArgumentException("Invalid birthday", nameof(birthday));
+        if (occupation is null) throw new ArgumentException("Invalid occupation", nameof(occupation));
 
         Name = name;
         Nickname = nickname;

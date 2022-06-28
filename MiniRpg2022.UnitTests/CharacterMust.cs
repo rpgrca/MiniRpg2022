@@ -73,4 +73,11 @@ public class CharacterMust
         var sut = CreateSubjectUnderTest();
         Assert.Equal(RAISTLIN_TYPE, sut.Occupation.ToString());
     }
+
+    [Fact]
+    public void ThrowException_WhenTypeIsInvalid()
+    {
+        var exception = Assert.Throws<ArgumentException>("occupation", () => new Character(RAISTLIN_NAME, RAISTLIN_NICKNAME, GetRaistlinBirthday(), null));
+        Assert.StartsWith("Invalid occupation", exception.Message);
+    }
 }
