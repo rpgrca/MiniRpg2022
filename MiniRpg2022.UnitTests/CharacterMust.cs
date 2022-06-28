@@ -108,4 +108,11 @@ public class CharacterMust
     {
         var exception = Assert.Throws<ArgumentException>("speed", () => new Character.Builder().Called(RAISTLIN_NAME).BornOn(GetRaistlinBirthday()).As(GetRaistlinOccupation()).WithSpeedOf(invalidSpeed).Build());
     }
+
+    [Fact]
+    public void ReturnSpeedCorrectly()
+    {
+        var sut = CreateSubjectUnderTest();
+        Assert.Equal(RAISTLIN_SPEED, sut.Speed);
+    }
 }
