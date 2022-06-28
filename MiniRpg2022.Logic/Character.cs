@@ -8,7 +8,7 @@ public partial class Character
     public int Health { get; }
     public IOccupation Occupation { get; }
 
-    public Character(string name, string nickname, Birthday birthday, IOccupation occupation)
+    private Character(string name, string nickname, Birthday birthday, IOccupation occupation)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
