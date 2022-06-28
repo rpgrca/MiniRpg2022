@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace videojuego
+namespace Videogame
 {
     class Program
     {
@@ -13,7 +13,7 @@ namespace videojuego
 
         }
 
-        void cargar(List <datos> todosLosPersonajesDatos)
+        static void cargar(List <datos> todosLosPersonajesDatos)
         {
             int num = 500;
             string salida = ""; // bandera para salir del ciclo
