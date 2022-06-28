@@ -15,7 +15,7 @@ public class BirthdayMust
     [Fact]
     public void ThrowException_WhenMaxValueIsSuppliedAsBirthday()
     {
-        var exception = Assert.Throws<ArgumentException>("birthday", () => new Birthday.Builder().BornOn(DateOnly.MaxValue).Build());
+        var exception = Assert.Throws<ArgumentException>("birthday", () => new Birthday.Builder().BornOn(DateOnly.MaxValue).BeingToday(TODAY).Build());
         Assert.StartsWith("Invalid birthday", exception.Message);
     }
 
@@ -31,5 +31,12 @@ public class BirthdayMust
     {
         var exception = Assert.Throws<ArgumentException>("today", () => new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(DateOnly.MaxValue).Build());
         Assert.StartsWith("Invalid today", exception.Message);
+    }
+
+    [Fact]
+    public void ThrowException_WhenBirthdayComesAfterToday()
+    {
+        var exception = Assert.Throws<ArgumentException>("birthday", () => new Birthday.Builder().BornOn(TODAY).BeingToday(RAISTLIN_BIRTHDAY).Build());
+        Assert.StartsWith("Cannot be born after today", exception.Message);
     }
 }
