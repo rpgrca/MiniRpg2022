@@ -1,31 +1,34 @@
 namespace Videogame;
 
-public class Speed
+public class LimitedValueBetween
 {
-    private readonly int _speed;
+    protected int Value { get; }
 
-    public static Speed From(int value) => new(value);
-
-    private Speed(int speed)
+    protected LimitedValueBetween(int minimum, int maximum, int value)
     {
-        if (speed < 1 || speed > 10) throw new ArgumentException("Invalid speed", nameof(speed));
-        _speed = speed;
+        if (value < minimum || value > maximum) throw new ArgumentException($"Invalid property value {value}");
+        Value = value;
     }
-
-    public static implicit operator int(Speed speed) => speed._speed;
 }
 
-public class Dexterity
+public class Speed : LimitedValueBetween
 {
-    private readonly int _dexterity;
+    public static Speed From(int value) => new(value);
 
-    public static Dexterity From(int value) => new(value);
-
-    private Dexterity(int dexterity)
+    private Speed(int speed) : base(1, 10, speed)
     {
-        if (dexterity < 1 || dexterity > 5) throw new ArgumentException("Invalid dexterity", nameof(dexterity));
-        _dexterity = dexterity;
     }
 
-    public static implicit operator int(Dexterity dexterity) => dexterity._dexterity;
+    public static implicit operator int(Speed speed) => speed.Value;
+}
+
+public class Dexterity : LimitedValueBetween
+{
+    public static Dexterity From(int value) => new(value);
+
+    private Dexterity(int dexterity) : base(1, 5, dexterity)
+    {
+    }
+
+    public static implicit operator int(Dexterity dexterity) => dexterity.Value;
 }

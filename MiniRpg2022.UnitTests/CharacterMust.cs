@@ -107,8 +107,9 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenSpeedIsInvalid(int invalidSpeed)
     {
-        var exception = Assert.Throws<ArgumentException>("speed", () => SetupSubjectUnderTest().WithSpeedOf(invalidSpeed).Build());
-        Assert.StartsWith("Invalid speed", exception.Message);
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithSpeedOf(invalidSpeed).Build());
+        Assert.StartsWith("Invalid property value", exception.Message);
+        Assert.Contains(invalidSpeed.ToString(), exception.Message);
     }
 
     [Fact]
@@ -125,8 +126,9 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenDexterityIsInvalid(int invalidDexterity)
     {
-        var exception = Assert.Throws<ArgumentException>("dexterity", () => SetupSubjectUnderTest().WithDexterityOf(invalidDexterity).Build());
-        Assert.StartsWith("Invalid dexterity", exception.Message);
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithDexterityOf(invalidDexterity).Build());
+        Assert.StartsWith("Invalid property value", exception.Message);
+        Assert.Contains(invalidDexterity.ToString(), exception.Message);
     }
 
     [Fact]
