@@ -39,4 +39,10 @@ public class BirthdayMust
         var exception = Assert.Throws<ArgumentException>("birthday", () => new Birthday.Builder().BornOn(TODAY).BeingToday(RAISTLIN_BIRTHDAY).Build());
         Assert.StartsWith("Cannot be born after today", exception.Message);
     }
+
+    [Fact]
+    public void ThrowException_WhenMoreThan300YearsAreSupplied()
+    {
+        var exception = Assert.Throws<ArgumentException>("birthday", () => new Birthday.Builder().BornOn(AMERICA_DISCOVERY).BeingToday(TODAY).Build());
+    }
 }
