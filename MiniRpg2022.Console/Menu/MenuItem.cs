@@ -5,13 +5,11 @@ namespace MiniRpg2022.Console;
 
 public abstract class MenuItem
 {
-    public int Index { get; }
     public string Text { get; }
     public abstract bool Execute(Configuration configuration);
 
-    protected MenuItem(int index, string text)
+    protected MenuItem(string text)
     {
-        Index = index;
         Text = text;
     }
 
@@ -24,7 +22,6 @@ public abstract class MenuItem
             answer = System.Console.ReadLine();
         }
         while (! options.Contains(answer));
-
         return answer;
     }
 
