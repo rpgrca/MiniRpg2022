@@ -22,7 +22,8 @@ public class CharacterMust
             .AlsoKnownAs(RAISTLIN_NICKNAME)
             .BornOn(GetRaistlinBirthday())
             .As(GetRaistlinOccupation())
-            .WithSpeedOf(RAISTLIN_SPEED);
+            .WithSpeedOf(RAISTLIN_SPEED)
+            .WithDexterityOf(RAISTLIN_DEXTERITY);
 
     private static Birthday GetRaistlinBirthday() =>
         new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
@@ -106,7 +107,8 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenSpeedIsInvalid(int invalidSpeed)
     {
-        var exception = Assert.Throws<ArgumentException>("speed", () => new Character.Builder().Called(RAISTLIN_NAME).BornOn(GetRaistlinBirthday()).As(GetRaistlinOccupation()).WithSpeedOf(invalidSpeed).Build());
+        var exception = Assert.Throws<ArgumentException>("speed", () => SetupSubjectUnderTest().WithSpeedOf(invalidSpeed).Build());
+        Assert.StartsWith("Invalid speed", exception.Message);
     }
 
     [Fact]
@@ -114,5 +116,23 @@ public class CharacterMust
     {
         var sut = CreateSubjectUnderTest();
         Assert.Equal(RAISTLIN_SPEED, sut.Speed);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(6)]
+    [InlineData(100)]
+    public void ThrowException_WhenDexterityIsInvalid(int invalidDexterity)
+    {
+        var exception = Assert.Throws<ArgumentException>("dexterity", () => SetupSubjectUnderTest().WithDexterityOf(invalidDexterity).Build());
+        Assert.StartsWith("Invalid dexterity", exception.Message);
+    }
+
+    [Fact]
+    public void ReturnDexterityCorrectly()
+    {
+        var sut = CreateSubjectUnderTest();
+        Assert.Equal(RAISTLIN_DEXTERITY, sut.Dexterity);
     }
 }

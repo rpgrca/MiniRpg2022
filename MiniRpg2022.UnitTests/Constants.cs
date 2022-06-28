@@ -10,4 +10,5 @@ public static class Constants
     public static readonly DateOnly AMERICA_DISCOVERY = new(1492, 10, 12);
     public const string RAISTLIN_TYPE = "mage";
     public const int RAISTLIN_SPEED = 1;
+    public const int RAISTLIN_DEXTERITY = 2;
 }

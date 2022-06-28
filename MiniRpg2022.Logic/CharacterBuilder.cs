@@ -9,6 +9,7 @@ public partial class Character
         private Birthday _birthday;
         private IOccupation _occupation;
         private int _speed;
+        private int _dexterity;
 
         public Builder()
         {
@@ -46,6 +47,12 @@ public partial class Character
             return this;
         }
 
-        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed);
+        public Builder WithDexterityOf(int dexterity)
+        {
+            _dexterity = dexterity;
+            return this;
+        }
+
+        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed, _dexterity);
     }
 }
