@@ -22,11 +22,11 @@ public class CharacterMust
             .AlsoKnownAs(RAISTLIN_NICKNAME)
             .BornOn(GetRaistlinBirthday())
             .As(GetRaistlinOccupation())
-            .WithSpeedOf(RAISTLIN_SPEED)
-            .WithDexterityOf(RAISTLIN_DEXTERITY)
-            .WithStrengthOf(RAISTLIN_STRENGTH)
-            .WithLevelOf(RAISTLIN_LEVEL)
-            .WithArmourOf(RAISTLIN_ARMOUR);
+            .WithProperty("speed", RAISTLIN_SPEED)
+            .WithProperty("dexterity", RAISTLIN_DEXTERITY)
+            .WithProperty("strength", RAISTLIN_STRENGTH)
+            .WithProperty("level", RAISTLIN_LEVEL)
+            .WithProperty("armour", RAISTLIN_ARMOUR);
 
     private static Birthday GetRaistlinBirthday() =>
         new Birthday.Builder().BornOn(RAISTLIN_BIRTHDAY).BeingToday(TODAY).Build();
@@ -110,7 +110,7 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenSpeedIsInvalid(int invalidSpeed)
     {
-        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithSpeedOf(invalidSpeed).Build());
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithProperty("speed", invalidSpeed).Build());
         Assert.StartsWith("Invalid property value", exception.Message);
         Assert.Contains(invalidSpeed.ToString(), exception.Message);
     }
@@ -119,7 +119,7 @@ public class CharacterMust
     public void ReturnSpeedCorrectly()
     {
         var sut = CreateSubjectUnderTest();
-        Assert.Equal(RAISTLIN_SPEED, sut.Speed);
+        Assert.Equal(RAISTLIN_SPEED, sut.GetValueFor("speed"));
     }
 
     [Theory]
@@ -129,7 +129,7 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenDexterityIsInvalid(int invalidDexterity)
     {
-        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithDexterityOf(invalidDexterity).Build());
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithProperty("dexterity", invalidDexterity).Build());
         Assert.StartsWith("Invalid property value", exception.Message);
         Assert.Contains(invalidDexterity.ToString(), exception.Message);
     }
@@ -138,7 +138,7 @@ public class CharacterMust
     public void ReturnDexterityCorrectly()
     {
         var sut = CreateSubjectUnderTest();
-        Assert.Equal(RAISTLIN_DEXTERITY, sut.Dexterity);
+        Assert.Equal(RAISTLIN_DEXTERITY, sut.GetValueFor("dexterity"));
     }
 
     [Theory]
@@ -148,7 +148,7 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenStrengthIsInvalid(int invalidStrength)
     {
-        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithStrengthOf(invalidStrength).Build());
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithProperty("strength", invalidStrength).Build());
         Assert.StartsWith("Invalid property value", exception.Message);
         Assert.Contains(invalidStrength.ToString(), exception.Message);
     }
@@ -157,7 +157,7 @@ public class CharacterMust
     public void ReturnStrengthCorrectly()
     {
         var sut = CreateSubjectUnderTest();
-        Assert.Equal(RAISTLIN_STRENGTH, sut.Strength);
+        Assert.Equal(RAISTLIN_STRENGTH, sut.GetValueFor("strength"));
     }
 
     [Theory]
@@ -167,7 +167,7 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenLevelIsInvalid(int invalidLevel)
     {
-        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithLevelOf(invalidLevel).Build());
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithProperty("level", invalidLevel).Build());
         Assert.StartsWith("Invalid property value", exception.Message);
         Assert.Contains(invalidLevel.ToString(), exception.Message);
     }
@@ -176,7 +176,7 @@ public class CharacterMust
     public void ReturnLevelCorrectly()
     {
         var sut = CreateSubjectUnderTest();
-        Assert.Equal(RAISTLIN_LEVEL, sut.Level);
+        Assert.Equal(RAISTLIN_LEVEL, sut.GetValueFor("level"));
     }
 
     [Theory]
@@ -186,7 +186,7 @@ public class CharacterMust
     [InlineData(100)]
     public void ThrowException_WhenArmourIsInvalid(int invalidArmour)
     {
-        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithArmourOf(invalidArmour).Build());
+        var exception = Assert.Throws<ArgumentException>(() => SetupSubjectUnderTest().WithProperty("armour", invalidArmour).Build());
         Assert.StartsWith("Invalid property value", exception.Message);
         Assert.Contains(invalidArmour.ToString(), exception.Message);
     }
@@ -195,6 +195,6 @@ public class CharacterMust
     public void ReturnArmourCorrectly()
     {
         var sut = CreateSubjectUnderTest();
-        Assert.Equal(RAISTLIN_ARMOUR, sut.Armour);
+        Assert.Equal(RAISTLIN_ARMOUR, sut.GetValueFor("armour"));
     }
 }

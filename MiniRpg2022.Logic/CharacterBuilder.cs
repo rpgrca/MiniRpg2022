@@ -1,3 +1,5 @@
+using MiniRpg2022.Logic.Characteristics;
+
 namespace Videogame;
 
 public partial class Character
@@ -8,16 +10,15 @@ public partial class Character
         private string _nickname;
         private Birthday _birthday;
         private IOccupation _occupation;
-        private int _speed;
-        private int _dexterity;
-        private int _strength;
-        private int _level;
-        private int _armour;
+        private readonly Dictionary<string, int> _properties;
+        private IPropertyFactory _propertyFactory;
 
         public Builder()
         {
             _name = string.Empty;
             _nickname = string.Empty;
+            _properties = new Dictionary<string, int>();
+            _propertyFactory = new PropertyFactory();
         }
 
         public Builder Called(string name)
@@ -44,36 +45,30 @@ public partial class Character
             return this;
         }
 
-        public Builder WithSpeedOf(int speed)
+        public Builder WithProperty(string name, int value)
         {
-            _speed = speed;
+            if (_properties.ContainsKey(name))
+            {
+                _properties[name] = value;
+            }
+            else
+            {
+                _properties.Add(name, value);
+            }
+
             return this;
         }
 
-        public Builder WithDexterityOf(int dexterity)
+        public Builder CreatingPropertiesWith(IPropertyFactory propertyFactory)
         {
-            _dexterity = dexterity;
+            _propertyFactory = propertyFactory;
             return this;
         }
 
-        public Builder WithStrengthOf(int strength)
+        public Character Build()
         {
-            _strength = strength;
-            return this;
+            var properties = _properties.Select(p => _propertyFactory.CreateFor(p.Key, p.Value)).ToDictionary(p => p.Name);
+            return new(_name, _nickname, _birthday, _occupation, properties);
         }
-
-        public Builder WithLevelOf(int level)
-        {
-            _level = level;
-            return this;
-        }
-
-        public Builder WithArmourOf(int armour)
-        {
-            _armour = armour;
-            return this;
-        }
-
-        public Character Build() => new(_name, _nickname, _birthday, _occupation, _speed, _dexterity, _strength, _level, _armour);
     }
 }

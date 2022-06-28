@@ -1,36 +1,34 @@
+using System.Linq;
 using MiniRpg2022.Logic.Characteristics;
 
 namespace Videogame;
 
 public partial class Character
 {
+    private readonly Dictionary<string, Property> _properties;
+
     public string Name { get; }
     public string Nickname { get; }
     public Birthday Birthday { get; }
-    public int Health { get; }
     public IOccupation Occupation { get; }
-    public Speed Speed { get; }
-    public Dexterity Dexterity { get; }
-    public Strength Strength { get; }
-    public Level Level { get; }
-    public Armour Armour { get; }
+    public int Health { get; }
 
-    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, int speed, int agility, int strength, int level, int armour)
+    private Character(string name, string nickname, Birthday birthday, IOccupation occupation, Dictionary<string, Property> properties)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name", nameof(name));
         if (nickname is null) throw new ArgumentException("Invalid nickname", nameof(nickname));
         if (birthday is null) throw new ArgumentException("Invalid birthday", nameof(birthday));
         if (occupation is null) throw new ArgumentException("Invalid occupation", nameof(occupation));
+        if (properties is null) throw new ArgumentException("Invalid properties", nameof(properties));
 
         Name = name;
         Nickname = nickname;
         Birthday = birthday;
         Occupation = occupation;
         Health = 100;
-        Speed = Speed.From(speed);
-        Dexterity = Dexterity.From(agility);
-        Strength = Strength.From(strength);
-        Level = Level.From(level);
-        Armour = Armour.From(armour);
+
+        _properties = properties;
     }
+
+    public int GetValueFor(string property) => _properties[property].Value;
 }
