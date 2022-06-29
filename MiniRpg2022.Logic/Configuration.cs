@@ -19,7 +19,7 @@ public class Configuration
         _today = new DateOnly(year, month, day);
     }
 
-    internal Randomizer CreateRandomizer() => new(_names, _today, _occupations, _properties);
+    internal Randomizer CreateRandomizer() => new(_names, _today, _occupations);
 
     public void RegisterOccupation(IOccupation occupation) =>
         _occupations.Add(occupation.ToString(), occupation);
@@ -65,4 +65,6 @@ public class Configuration
     public void RegisterProperty(Property property) => _properties.Add(property);
 
     public IEnumerable<Property> GetProperties() => _properties;
+
+    public int GetCharactersAlive() => _characters.Count;
 }

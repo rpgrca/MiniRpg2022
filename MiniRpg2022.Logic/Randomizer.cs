@@ -2,20 +2,18 @@ using MiniRpg2022.Logic.Characteristics;
 
 namespace Videogame;
 
-public class Randomizer
+internal class Randomizer
 {
     private readonly DateOnly _today;
     private readonly List<string> _names;
     private readonly List<IOccupation> _occupations;
-    private readonly List<Property> _properties;
     private readonly Random _randomGenerator;
 
-    public Randomizer(List<string> names, DateOnly today, Dictionary<string, IOccupation> occupations, List<Property> properties)
+    public Randomizer(List<string> names, DateOnly today, Dictionary<string, IOccupation> occupations)
     {
         _names = names;
         _today = today;
         _occupations = occupations.Values.ToList();
-        _properties = properties;
         _randomGenerator = new Random();
     }
 
