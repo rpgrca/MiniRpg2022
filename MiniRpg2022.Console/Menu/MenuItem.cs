@@ -22,10 +22,10 @@ public abstract class MenuItem
             answer = System.Console.ReadLine();
         }
         while (! options.Contains(answer));
-        return answer;
+        return answer!;
     }
 
-    protected string Prompt(string prompt, Func<string?, bool> conditionCallback)
+    protected string? Prompt(string prompt, Func<string?, bool> conditionCallback)
     {
         string? answer;
         do
