@@ -6,6 +6,13 @@ namespace MiniRpg2022.Console.UnitTests;
 public class QuitMenuMust
 {
     [Fact]
+    public void ReturnCorrectMenuDescription()
+    {
+        var sut = new QuitMenu();
+        Assert.Equal("Quit", sut.Text);
+    }
+
+    [Fact]
     public void ReturnTrue_WhenQuitMenuReadsY()
     {
         var sut = new QuitMenu();
