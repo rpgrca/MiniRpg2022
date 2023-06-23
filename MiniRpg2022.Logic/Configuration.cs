@@ -9,14 +9,16 @@ public class Configuration
     private readonly List<string> _names;
     private readonly List<Property> _properties;
     private readonly DateOnly _today;
+    private readonly IMessaging _messaging;
 
-    public Configuration(int year, int month, int day)
+    public Configuration(int year, int month, int day, IMessaging messaging)
     {
         _occupations = new Dictionary<string, IOccupation>();
         _characters = new Dictionary<string, Character>();
         _properties = new List<Property>();
         _names = new List<string>();
         _today = new DateOnly(year, month, day);
+        _messaging = messaging;
     }
 
     internal Randomizer CreateRandomizer() => new(_names, _today, _occupations);
@@ -67,4 +69,6 @@ public class Configuration
     public IEnumerable<Property> GetProperties() => _properties;
 
     public int GetCharactersAlive() => _characters.Count;
+
+    public IMessaging Messaging => _messaging;
 }

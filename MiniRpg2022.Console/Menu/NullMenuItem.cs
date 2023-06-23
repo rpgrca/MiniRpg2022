@@ -37,9 +37,9 @@ public class CombatMenu : MenuItem
         var secondName = names[1];
         if (count > 2)
         {
-            firstName = Choose("Choose the first fighter", names);
+            firstName = configuration.Messaging.Choose("Choose the first fighter", names);
             names.Remove(firstName);
-            secondName = Choose("Choose the second fighter", names);
+            secondName = configuration.Messaging.Choose("Choose the second fighter", names);
         }
 
         System.Console.WriteLine($"{firstName} will fight {secondName}!");

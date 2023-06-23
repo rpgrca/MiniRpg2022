@@ -1,62 +1,45 @@
-﻿using MiniRpg2022.Console;
-using System.Collections.Generic;
-using Videogame;
+﻿using Videogame;
 using Xunit;
 
 namespace MiniRpg2022.Console.UnitTests;
 
 public class QuitMenuMust
 {
-    public class TestableQuitMenu : QuitMenu
-    {
-        private readonly string[] _readText;
-        private int _index;
-
-        public List<string> WrittenText { get; private set; }
-
-        public TestableQuitMenu(string[] readText)
-        {
-            _index = 0;
-            _readText = readText;
-            WrittenText = new List<string>();
-        }
-
-        protected override void WriteToConsole(string text) =>
-            WrittenText.Add(text);
-
-        protected override string? ReadLineFromConsole() => _readText[_index++];
-    }
-
     [Fact]
     public void ReturnTrue_WhenQuitMenuReadsY()
     {
-        var sut = new TestableQuitMenu(new[] { "Y" });
-        Assert.True(sut.Execute(ObtenerConfiguracion()));
+        var sut = new QuitMenu();
+        var stub = new ConsoleStub(new[] { "Y" });
+        Assert.True(sut.Execute(ObtainConfiguration(stub)));
     }
 
-    private static Configuration ObtenerConfiguracion() => new(2022, 11, 30);
+    private static Configuration ObtainConfiguration(IConsole stub) =>
+        new(2022, 11, 30, new Messaging(stub));
 
     [Fact]
     public void ReturnFalse_WhenQuitMenuReadsN()
     {
-        var sut = new TestableQuitMenu(new[] { "N" });
-        Assert.False(sut.Execute(ObtenerConfiguracion()));
+        var sut = new QuitMenu();
+        var stub = new ConsoleStub(new[] { "N" });
+        Assert.False(sut.Execute(ObtainConfiguration(stub)));
     }
 
     [Fact]
     public void DisplayCorrectPrompt()
     {
-        var sut = new TestableQuitMenu(new[] { "Y" });
-        sut.Execute(ObtenerConfiguracion());
-        Assert.Collection(sut.WrittenText, p => Assert.Equal("- Are you sure? [Y, N]: ", p));
+        var sut = new QuitMenu();
+        var spy = new ConsoleStub(new[] { "Y" });
+        sut.Execute(ObtainConfiguration(spy));
+        Assert.Collection(spy.WrittenText, p => Assert.Equal("- Are you sure? [Y, N]: ", p));
     }
 
     [Fact]
     public void RetryCorrectly()
     {
-        var sut = new TestableQuitMenu(new[] { "P", "Y" });
-        sut.Execute(ObtenerConfiguracion());
-        Assert.Collection(sut.WrittenText,
+        var sut = new QuitMenu();
+        var spy = new ConsoleStub(new[] { "P", "Y" });
+        sut.Execute(ObtainConfiguration(spy));
+        Assert.Collection(spy.WrittenText,
             p1 => Assert.Equal("- Are you sure? [Y, N]: ", p1),
             p2 => Assert.Equal("- Are you sure? [Y, N]: ", p2));
     }

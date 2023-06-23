@@ -18,13 +18,13 @@ public class ManualLoadPropertiesMenu : MenuItem
             return false;
         }
 
-        var name = Choose("Choose a character", names);
+        var name = configuration.Messaging.Choose("Choose a character", names);
         var character = configuration.GetCharacter(name);
         var characterBuilder = new Character.Builder();
 
         foreach (var property in configuration.GetProperties())
         {
-            var value = PromptRange($"Choose value for {property.Name}", property.Minimum, property.Maximum);
+            var value = configuration.Messaging.PromptRange($"Choose value for {property.Name}", property.Minimum, property.Maximum);
             characterBuilder.WithProperty(property.Name, value);
         }
 

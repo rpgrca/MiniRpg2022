@@ -17,7 +17,7 @@ public class ShowDataMenu : MenuItem
             return false;
         }
 
-        var name = Choose("Choose a character", names);
+        var name = configuration.Messaging.Choose("Choose a character", names);
         DisplayDataFrom(configuration.GetCharacter(name));
         return false;
     }
@@ -47,7 +47,7 @@ public class ShowPropertyMenu : MenuItem
             return false;
         }
 
-        var name = Choose("Choose a character", names);
+        var name = configuration.Messaging.Choose("Choose a character", names);
         DisplayPropertiesFrom(configuration, configuration.GetCharacter(name));
         return false;
     }

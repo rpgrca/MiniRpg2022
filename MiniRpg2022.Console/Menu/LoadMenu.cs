@@ -11,13 +11,13 @@ public class ManualLoadMenu : MenuItem
 
     public override bool Execute(Configuration configuration)
     {
-        var name = Prompt("Please name your character", v => string.IsNullOrEmpty(v));
+        var name = configuration.Messaging.Prompt("Please name your character", v => string.IsNullOrEmpty(v));
 
         if (NameExistsAndDoNotOverride(configuration, name)) return false;
 
-        var occupation = Choose("Please choose an occupation", configuration.GetOccupationNames());
-        var nickname = Prompt("Add a nickname for your character", v => v is null);
-        var birthday = PromptDate("Please input your character birthday", "yyyy/MM/dd");
+        var occupation = configuration.Messaging.Choose("Please choose an occupation", configuration.GetOccupationNames());
+        var nickname = configuration.Messaging.Prompt("Add a nickname for your character", v => v is null);
+        var birthday = configuration.Messaging.PromptDate("Please input your character birthday", "yyyy/MM/dd");
 
         var character = new Character.Builder()
             .Called(name)
@@ -35,7 +35,7 @@ public class ManualLoadMenu : MenuItem
         var character = configuration.GetCharacterOrDefault(name);
         if (character is not null)
         {
-            var replace = Choose("Character already exists! Do you wish to override them? (Y/N)", new List<string> { "Y", "N" });
+            var replace = configuration.Messaging.Choose("Character already exists! Do you wish to override them? (Y/N)", new List<string> { "Y", "N" });
             return replace == "N";
         }
 

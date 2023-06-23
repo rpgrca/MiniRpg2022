@@ -9,7 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var configuration = new Configuration(2022, 6, 28);
+        var configuration = new Configuration(2022, 6, 28, new Messaging(new Console()));
 
         configuration.RegisterOccupation(new Mage());
         configuration.RegisterOccupation(new Warrior());
