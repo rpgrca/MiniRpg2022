@@ -30,4 +30,12 @@ public class QuitMenuMust
         var sut = new TestableQuitMenu("N");
         Assert.False(sut.Execute(null));
     }
+
+    [Fact]
+    public void DisplayCorrectPrompt()
+    {
+        var sut = new TestableQuitMenu("Y");
+        sut.Execute(null);
+        Assert.Equal("- Are you sure? [Y, N]: ", sut.WrittenText);
+    }
 }
