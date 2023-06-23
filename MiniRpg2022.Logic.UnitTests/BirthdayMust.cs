@@ -1,7 +1,7 @@
-using static MiniRpg2022.UnitTests.Constants;
+using static MiniRpg2022.Logic.UnitTests.Constants;
 using Videogame;
 
-namespace MiniRpg2022.UnitTests;
+namespace MiniRpg2022.Logic.UnitTests;
 
 public class BirthdayMust
 {

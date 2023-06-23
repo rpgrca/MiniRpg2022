@@ -1,4 +1,4 @@
-namespace MiniRpg2022.UnitTests;
+namespace MiniRpg2022.Logic.UnitTests;
 
 public static class Constants
 {

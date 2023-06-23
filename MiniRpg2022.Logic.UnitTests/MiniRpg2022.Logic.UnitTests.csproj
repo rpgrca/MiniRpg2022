@@ -4,8 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>MiniRpg2022.UnitTests</AssemblyName>
-    <RootNamespace>MiniRpg2022.UnitTests</RootNamespace>
+    <AssemblyName>MiniRpg2022.Logic.UnitTests</AssemblyName>
+    <RootNamespace>MiniRpg2022.Logic.UnitTests</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
