@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniRpg2022.Runtime", "Mini
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniRpg2022.Logic.UnitTests", "MiniRpg2022.Logic.UnitTests\MiniRpg2022.Logic.UnitTests.csproj", "{006DDC85-7EEA-4B03-A506-759E13D521EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniRpg2022.Console.UnitTests", "MiniRpg2022.Console.UnitTests\MiniRpg2022.Console.UnitTests.csproj", "{3785FC3A-883F-4F0B-8C5F-472638C643A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{006DDC85-7EEA-4B03-A506-759E13D521EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{006DDC85-7EEA-4B03-A506-759E13D521EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{006DDC85-7EEA-4B03-A506-759E13D521EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3785FC3A-883F-4F0B-8C5F-472638C643A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3785FC3A-883F-4F0B-8C5F-472638C643A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3785FC3A-883F-4F0B-8C5F-472638C643A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3785FC3A-883F-4F0B-8C5F-472638C643A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

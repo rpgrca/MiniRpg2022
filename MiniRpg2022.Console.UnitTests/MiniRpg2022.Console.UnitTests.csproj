@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniRpg2022.Console\MiniRpg2022.Console.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>MiniRpg2022.Console.UnitTests</AssemblyName>
+    <RootNamespace>MiniRpg2022.Console.UnitTests</RootNamespace>
+  </PropertyGroup>
+
+</Project>
