@@ -23,4 +23,11 @@ public class QuitMenuMust
         var sut = new TestableQuitMenu("Y");
         Assert.True(sut.Execute(null));
     }
+
+    [Fact]
+    public void ReturnFalse_WhenQuitMenuReadsN()
+    {
+        var sut = new TestableQuitMenu("N");
+        Assert.False(sut.Execute(null));
+    }
 }
