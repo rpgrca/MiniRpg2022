@@ -51,4 +51,13 @@ public class QuitMenuMust
         Assert.Collection(sut.WrittenText, p => Assert.Equal("- Are you sure? [Y, N]: ", p));
     }
 
+    [Fact]
+    public void RetryCorrectly()
+    {
+        var sut = new TestableQuitMenu(new[] { "P", "Y" });
+        sut.Execute(ObtenerConfiguracion());
+        Assert.Collection(sut.WrittenText,
+            p1 => Assert.Equal("- Are you sure? [Y, N]: ", p1),
+            p2 => Assert.Equal("- Are you sure? [Y, N]: ", p2));
+    }
 }
