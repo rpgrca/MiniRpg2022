@@ -2,7 +2,7 @@ namespace Videogame;
 
 public partial class Birthday
 {
-    private DateOnly _birthday;
+    private readonly DateOnly _birthday;
 
     private Birthday(DateOnly today, DateOnly birthday)
     {
