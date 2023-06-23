@@ -6,6 +6,7 @@ namespace MiniRpg2022.Console;
 public abstract class MenuItem
 {
     public string Text { get; }
+
     public abstract bool Execute(Configuration configuration);
 
     protected MenuItem(string text)
@@ -18,8 +19,8 @@ public abstract class MenuItem
         string? answer;
         do
         {
-            System.Console.Write($"- {prompt} [{string.Join(", ", options)}]: ");
-            answer = System.Console.ReadLine();
+            WriteToConsole($"- {prompt} [{string.Join(", ", options)}]: ");
+            answer = ReadLineFromConsole();
         }
         while (! options.Contains(answer));
         return answer!;
@@ -30,8 +31,8 @@ public abstract class MenuItem
         string? answer;
         do
         {
-            System.Console.Write($"- {prompt}: ");
-            answer = System.Console.ReadLine();
+            WriteToConsole($"- {prompt}: ");
+            answer = ReadLineFromConsole();
         }
         while (conditionCallback(answer));
 
@@ -44,8 +45,8 @@ public abstract class MenuItem
         string? answer;
         do
         {
-            System.Console.Write($"- {prompt} ({format}): ");
-            answer = System.Console.ReadLine();
+            WriteToConsole($"- {prompt} ({format}): ");
+            answer = ReadLineFromConsole();
         }
         while (!DateOnly.TryParseExact(answer, new [] { format }, CultureInfo.InvariantCulture, DateTimeStyles.None, out result));
 
@@ -56,8 +57,8 @@ public abstract class MenuItem
     {
         do
         {
-            System.Console.Write($"- {prompt} ({minimum}..{maximum}): ");
-            var answer = System.Console.ReadLine();
+            WriteToConsole($"- {prompt} ({minimum}..{maximum}): ");
+            var answer = ReadLineFromConsole();
             if (int.TryParse(answer, out int value))
             {
                 if (minimum <= value && value <= maximum)
@@ -67,4 +68,10 @@ public abstract class MenuItem
             }
         } while (true);
     }
+
+    protected virtual void WriteToConsole(string text) =>
+        System.Console.Write(text);
+
+    protected virtual string? ReadLineFromConsole() =>
+        System.Console.ReadLine();
 }
