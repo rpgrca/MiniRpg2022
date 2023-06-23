@@ -1,4 +1,5 @@
 ﻿using MiniRpg2022.Console;
+using System.Collections.Generic;
 using Xunit;
 
 namespace MiniRpg2022.Console.UnitTests;
@@ -8,11 +9,16 @@ public class QuitMenuMust
     public class TestableQuitMenu : QuitMenu
     {
         private string? _readText;
-        public string WrittenText { get; private set; }
+        public List<string> WrittenText { get; private set; }
 
-        public TestableQuitMenu(string? readText) => _readText = readText;
+        public TestableQuitMenu(string? readText)
+        {
+            _readText = readText;
+            WrittenText = new List<string>();
+        }
 
-        protected override void WriteToConsole(string text) => WrittenText = text;
+        protected override void WriteToConsole(string text) =>
+            WrittenText.Add(text);
 
         protected override string? ReadLineFromConsole() => _readText;
     }
@@ -36,6 +42,6 @@ public class QuitMenuMust
     {
         var sut = new TestableQuitMenu("Y");
         sut.Execute(null);
-        Assert.Equal("- Are you sure? [Y, N]: ", sut.WrittenText);
+        Assert.Collection(sut.WrittenText, p => Assert.Equal("- Are you sure? [Y, N]: ", p));
     }
 }
