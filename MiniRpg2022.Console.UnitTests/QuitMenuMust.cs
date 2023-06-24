@@ -1,5 +1,5 @@
-﻿using Videogame;
-using Xunit;
+﻿using Xunit;
+using static MiniRpg2022.Console.UnitTests.Constants;
 
 namespace MiniRpg2022.Console.UnitTests;
 
@@ -19,9 +19,6 @@ public class QuitMenuMust
         var stub = new ConsoleStub(new[] { "Y" });
         Assert.True(sut.Execute(ObtainConfiguration(stub)));
     }
-
-    private static Configuration ObtainConfiguration(IConsole stub) =>
-        new(2022, 11, 30, new Messaging(stub));
 
     [Fact]
     public void ReturnFalse_WhenQuitMenuReadsN()
