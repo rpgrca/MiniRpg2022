@@ -22,14 +22,14 @@ public class CombatMenu : MenuItem
         var count = configuration.GetCharactersAlive();
         if (count == 0)
         {
-            System.Console.WriteLine("No loaded characters still.");
+            configuration.Messaging.Show("No loaded characters still.");
             return false;
         }
 
         var names = configuration.GetCharacterNames().ToList();
         if (count == 1)
         {
-            System.Console.WriteLine($"{names[0]} cannot battle himself.");
+            configuration.Messaging.Show($"{names[0]} cannot battle himself.");
             return false;
         }
 
@@ -42,7 +42,7 @@ public class CombatMenu : MenuItem
             secondName = configuration.Messaging.Choose("Choose the second fighter", names);
         }
 
-        System.Console.WriteLine($"{firstName} will fight {secondName}!");
+        configuration.Messaging.Show($"{firstName} will fight {secondName}!");
         /*
         var battle = new Battle(configuration.GetCharacter(firstName), configuration.GetCharacter(secondName));
         for (var round = 0; round < 3; round++)

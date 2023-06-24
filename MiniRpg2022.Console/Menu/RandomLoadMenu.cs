@@ -15,7 +15,7 @@ public class RandomLoadMenu : MenuItem
         var character = characterRandomization.Create();
         configuration.RegisterCharacter(character);
 
-        System.Console.WriteLine($"{character.Name} properties generated randomly.");
+        configuration.Messaging.Show($"{character.Name} properties generated randomly.");
         return false;
     }
 }

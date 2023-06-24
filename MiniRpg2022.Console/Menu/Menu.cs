@@ -35,20 +35,20 @@ public class Menu : IMenu
 
             FindSelectedMenuItem();
             ExecuteMenuItem();
-            System.Console.WriteLine();
+            _configuration.Messaging.Show("");
         }
         while (!_quit);
     }
 
     private void DisplayMenu() =>
-        System.Console.WriteLine(string.Join("\n", _menuItems.Select((p, i) => $"{i + 1}) {p.Text}")));
+        _configuration.Messaging.Show(string.Join("\n", _menuItems.Select((p, i) => $"{i + 1}) {p.Text}")));
 
     private void ReadOption()
     {
-        System.Console.Write("Choose an option: ");
-        var keyboard = System.Console.ReadLine();
+        _configuration.Messaging.Show("Choose an option: ");
+        var keyboard = _configuration.Messaging.Prompt();
         _key = (keyboard?.Length != 1) ? ' ' : keyboard[0];
-        System.Console.WriteLine();
+        _configuration.Messaging.Show("");
     }
 
     private void FindSelectedMenuItem()

@@ -14,7 +14,7 @@ public class ManualLoadPropertiesMenu : MenuItem
         var names = configuration.GetCharacterNames();
         if (! names.Any())
         {
-            System.Console.WriteLine("No loaded characters still.");
+            configuration.Messaging.Show("No loaded characters still.");
             return false;
         }
 

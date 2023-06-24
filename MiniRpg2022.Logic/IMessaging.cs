@@ -6,4 +6,6 @@ public interface IMessaging
     string? Prompt(string prompt, Func<string?, bool> conditionCallback);
     DateOnly PromptDate(string prompt, string format);
     int PromptRange(string prompt, int minimum, int maximum);
+    string? Prompt();
+    void Show(string text);
 }

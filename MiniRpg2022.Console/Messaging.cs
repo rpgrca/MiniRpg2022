@@ -34,6 +34,8 @@ public class Messaging : IMessaging
         return answer;
     }
 
+    public string? Prompt() => _console.ReadLine();
+
     public DateOnly PromptDate(string prompt, string format)
     {
         DateOnly result;
@@ -63,4 +65,6 @@ public class Messaging : IMessaging
             }
         } while (true);
     }
+
+    public void Show(string text) => _console.WriteLine(text);
 }
