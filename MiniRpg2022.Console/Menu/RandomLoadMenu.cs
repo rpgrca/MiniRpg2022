@@ -1,4 +1,3 @@
-using MiniRpg2022.Logic.Characteristics;
 using Videogame;
 
 namespace MiniRpg2022.Console;
