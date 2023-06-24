@@ -1,8 +1,9 @@
 using Videogame;
+using MiniRpg2022.Logic;
 
 namespace MiniRpg2022.Console;
 
-public class Menu
+public class Menu : IMenu
 {
     private readonly List<MenuItem> _menuItems;
     private readonly Configuration _configuration;
@@ -46,7 +47,7 @@ public class Menu
     {
         System.Console.Write("Choose an option: ");
         var keyboard = System.Console.ReadLine();
-        _key = (keyboard?.Length != 1)? ' ' : keyboard[0];
+        _key = (keyboard?.Length != 1) ? ' ' : keyboard[0];
         System.Console.WriteLine();
     }
 

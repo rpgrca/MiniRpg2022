@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using MiniRpg2022.Logic.Characteristics;
-using Videogame;
+﻿using Videogame;
+using MiniRpg2022.Console;
 
-namespace MiniRpg2022.Console;
+namespace MiniRpg2022.Runtime;
 
 class Program
 {
     static void Main(string[] args)
     {
-        var configuration = new Configuration(2022, 6, 28, new Messaging(new Console()));
+        var configuration = new Configuration(2022, 6, 28, new Messaging(new Console.Console()));
 
         configuration.RegisterOccupation(new Mage());
         configuration.RegisterOccupation(new Warrior());
