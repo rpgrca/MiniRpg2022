@@ -28,8 +28,11 @@ jobs:
     - name: Build solutions
       run: dotnet build --configuration Debug --no-restore
 
-    - name: Testing solution
-      run: coverlet MiniRpg2022.Logic.UnitTests/bin/Debug/net7/MiniRpg2022.Logic.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Logic.UnitTests/MiniRpg2022.Logic.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.logic.coverage.xml
+    - name: Testing Logic
+      run: coverlet MiniRpg2022.Logic.UnitTests/bin/Debug/net7.0/MiniRpg2022.Logic.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Logic.UnitTests/MiniRpg2022.Logic.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.logic.coverage.xml
+
+    - name: Testing Console
+      run: coverlet MiniRpg2022.Console.UnitTests/bin/Debug/net7.0/MiniRpg2022.Console.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Console.UnitTests/MiniRpg2022.Console.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.console.coverage.xml
 
     - name: Upload coverage to CodeCov
       run: bash <(curl -s https://codecov.io/bash)
