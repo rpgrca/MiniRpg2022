@@ -17,7 +17,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 9.x
 
     - name: Restore packages
       run: dotnet restore
@@ -29,13 +29,15 @@ jobs:
       run: dotnet build --configuration Debug --no-restore
 
     - name: Testing Logic
-      run: coverlet MiniRpg2022.Logic.UnitTests/bin/Debug/net7.0/MiniRpg2022.Logic.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Logic.UnitTests/MiniRpg2022.Logic.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.logic.coverage.xml
+      run: coverlet MiniRpg2022.Logic.UnitTests/bin/Debug/net9/MiniRpg2022.Logic.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Logic.UnitTests/MiniRpg2022.Logic.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.logic.coverage.xml
 
     - name: Testing Console
-      run: coverlet MiniRpg2022.Console.UnitTests/bin/Debug/net7.0/MiniRpg2022.Console.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Console.UnitTests/MiniRpg2022.Console.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.console.coverage.xml
+      run: coverlet MiniRpg2022.Console.UnitTests/bin/Debug/net9/MiniRpg2022.Console.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Console.UnitTests/MiniRpg2022.Console.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.console.coverage.xml
 
     - name: Upload coverage to CodeCov
-      run: bash <(curl -s https://codecov.io/bash)
+      run: codecov/codecov-action@v5
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Archive code coverage results
       uses: actions/upload-artifact@v4
