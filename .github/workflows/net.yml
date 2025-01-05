@@ -35,7 +35,7 @@ jobs:
       run: coverlet MiniRpg2022.Console.UnitTests/bin/Debug/net9/MiniRpg2022.Console.UnitTests.dll --target "dotnet" --targetargs "test MiniRpg2022.Console.UnitTests/MiniRpg2022.Console.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output minirpg2022.console.coverage.xml
 
     - name: Upload coverage to CodeCov
-      run: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v5
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
